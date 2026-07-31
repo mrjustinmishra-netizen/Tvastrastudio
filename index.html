@@ -3,171 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tvastra Studio | Photography & Videography</title>
-    <!-- Google Fonts for stylish typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Tvastra Studio | High-End Production House</title>
+    <!-- Premium Fonts: Syne for headings, Inter for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Syne:wght@600;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS Reset & Colors */
+        /* CSS Variables & Reset */
         :root {
-            --bg-color: #0a0a0a;
-            --text-color: #ffffff;
-            --accent-color: #d4af37; /* Premium Gold Accent */
-            --light-gray: #1a1a1a;
+            --bg-dark: #050505;
+            --text-light: #f4f4f4;
+            --accent: #ff4a00; /* Creative Orange/Red Accent */
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Custom Cursor */ }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
         a { text-decoration: none; color: inherit; }
-        
-        /* Navbar */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 50px; background-color: rgba(10, 10, 10, 0.95); position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #333; }
-        nav .logo { font-size: 22px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
-        nav ul { list-style: none; display: flex; gap: 35px; }
-        nav ul li a { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; transition: color 0.3s; }
-        nav ul li a:hover { color: var(--accent-color); }
 
-        /* Hero Section (Home Image) */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover; padding: 0 20px; }
-        .hero h1 { font-size: 4.5rem; font-weight: 700; letter-spacing: 8px; margin-bottom: 15px; text-transform: uppercase; }
-        .hero p { font-size: 1.1rem; max-width: 650px; margin-bottom: 40px; font-weight: 300; color: #ddd; }
-        .btn { padding: 14px 35px; border: 1px solid var(--text-color); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.4s ease; cursor: pointer; background: transparent; color: white; }
-        .btn:hover { background-color: var(--text-color); color: var(--bg-color); }
+        /* Custom Cursor */
+        .cursor { width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; }
+        .cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
 
-        /* Section Titles */
-        .section-title { font-size: 2.2rem; text-align: center; margin-bottom: 60px; letter-spacing: 4px; text-transform: uppercase; font-weight: 600; }
-        
-        /* Work Section (Portfolio) */
-        .work { padding: 120px 50px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-        .card { background-color: var(--light-gray); border-radius: 4px; overflow: hidden; transition: transform 0.4s ease; border: 1px solid #222; }
-        .card:hover { transform: translateY(-10px); border-color: #444; }
-        .card img { width: 100%; height: 300px; object-fit: cover; }
-        .card-content { padding: 35px; }
-        .card-number { font-size: 1.2rem; color: var(--accent-color); font-weight: 700; margin-bottom: 5px; }
-        .card-title { font-size: 1.6rem; margin-bottom: 15px; font-weight: 600; }
-        .card p { font-size: 0.95rem; color: #aaa; margin-bottom: 25px; }
-        
-        /* Services Section */
-        .services { background-color: var(--light-gray); padding: 120px 50px; }
-        .services-list { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; }
-        .service-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding: 30px 0; transition: all 0.3s ease; cursor: pointer; }
-        .service-item:hover h3 { color: var(--accent-color); }
-        .service-item h3 { font-size: 1.5rem; font-weight: 400; letter-spacing: 1px; transition: color 0.3s; }
-        .service-item span { color: #888; font-size: 12px; letter-spacing: 2px; }
+        /* Navbar (Multi-page Setup) */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 60px; position: absolute; width: 100%; top: 0; z-index: 100; mix-blend-mode: difference; }
+        nav .logo { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: 2px; }
+        nav ul { display: flex; gap: 40px; list-style: none; }
+        nav ul li a { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; position: relative; }
+        nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--accent); transition: width 0.3s; }
+        nav ul li a:hover::after { width: 100%; }
 
-        /* Contact Section */
-        .contact { padding: 120px 50px; text-align: center; }
-        .contact p { margin-bottom: 15px; font-size: 1.1rem; color: #ccc; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .contact .email { font-size: 2.5rem; font-weight: 600; margin: 30px 0; color: var(--accent-color); word-wrap: break-word; }
+        /* Hero Section with 3D Model */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; position: relative; }
+        .hero-content { width: 50%; z-index: 10; }
+        .hero-content h1 { font-family: 'Syne', sans-serif; font-size: 5vw; line-height: 1; margin-bottom: 20px; text-transform: uppercase; clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%); /* For GSAP Animation */ }
+        .hero-content p { font-size: 1.2rem; font-weight: 300; opacity: 0.7; max-width: 500px; margin-bottom: 40px; }
         
-        /* Footer */
-        footer { padding: 40px 50px; text-align: center; background-color: #050505; border-top: 1px solid #111; font-size: 14px; color: #666; }
-        
-        /* Mobile Responsiveness */
-        @media(max-width: 768px) {
-            nav { flex-direction: column; padding: 20px; position: static; }
-            nav ul { margin-top: 20px; gap: 15px; flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 2.5rem; letter-spacing: 4px; }
-            .work, .services, .contact { padding: 60px 20px; }
-            .contact .email { font-size: 1.5rem; }
-        }
+        /* 3D Model Container */
+        .model-container { width: 50%; height: 100vh; position: absolute; right: 0; top: 0; z-index: 1; pointer-events: auto; }
+
+        /* Stats Section */
+        .stats-section { padding: 100px 60px; display: flex; justify-content: space-around; background: #0a0a0a; border-top: 1px solid #222; border-bottom: 1px solid #222; }
+        .stat-box { text-align: center; }
+        .stat-number { font-family: 'Syne', sans-serif; font-size: 4.5rem; font-weight: 800; color: var(--accent); }
+        .stat-label { font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-top: 10px; }
+
+        /* Explore Button */
+        .explore-btn { padding: 18px 40px; background: transparent; border: 1px solid var(--text-light); color: var(--text-light); font-family: 'Inter', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; position: relative; overflow: hidden; z-index: 1; }
+        .explore-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--accent); z-index: -1; transition: 0.4s; }
+        .explore-btn:hover::before { left: 0; }
+        .explore-btn:hover { border-color: var(--accent); }
     </style>
+    <!-- Spline 3D Viewer Script -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js"></script>
 </head>
 <body>
 
-    <!-- Navbar -->
+    <!-- Custom Cursor Elements -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Navigation -->
     <nav>
-        <div class="logo">TVASTRA STUDIO.</div>
+        <div class="logo">TVASTRA.</div>
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1>Tvastra Studio.</h1>
-        <p>Discover the artistry of Tvastra Studio, where creativity knows no bounds. From fashion to portraits, we craft captivating imagery that resonates deeply.</p>
-        <a href="#contact"><button class="btn">Get In Touch</button></a>
-    </section>
-
-    <!-- Work Section (Like Farazdak Studio) -->
-    <section class="work" id="work">
-        <h2 class="section-title">Work.</h2>
-        <div class="grid">
-            <!-- Card 01 -->
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Fashion">
-                <div class="card-content">
-                    <div class="card-number">01</div>
-                    <div class="card-title">Fashion & Editorial</div>
-                    <p>Looking to showcase your latest fashion or editorial creations? Our studio specializes in bringing your vision to life.</p>
-                    <a href="#" class="btn" style="padding: 10px 20px; font-size: 11px;">View Albums</a>
-                </div>
-            </div>
-            <!-- Card 02 -->
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Portraits">
-                <div class="card-content">
-                    <div class="card-number">02</div>
-                    <div class="card-title">Professional Headshots</div>
-                    <p>Let us help you showcase your best self with our exceptional portrait and headshot photography services.</p>
-                    <a href="#" class="btn" style="padding: 10px 20px; font-size: 11px;">View Albums</a>
-                </div>
-            </div>
-            <!-- Card 03 -->
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Food">
-                <div class="card-content">
-                    <div class="card-number">03</div>
-                    <div class="card-title">Food & Product</div>
-                    <p>Create a feast for the eyes with our food and product photography. We specialize in high-quality imagery.</p>
-                    <a href="#" class="btn" style="padding: 10px 20px; font-size: 11px;">View Albums</a>
-                </div>
-            </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="anim-title">We Craft</h1>
+            <h1 class="anim-title" style="color: var(--accent);">Visual Masterpieces</h1>
+            <p class="anim-text">India's leading production house. Blending cinematic storytelling with cutting-edge visual effects to elevate your brand.</p>
+            <a href="work.html" class="explore-btn anim-btn">Explore Our Work</a>
+        </div>
+        
+        <!-- 3D Model Embed (Interactive Camera/Abstract Shape) -->
+        <div class="model-container">
+            <spline-viewer url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"></spline-viewer>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <h2 class="section-title">Services.</h2>
-        <div class="services-list">
-            <div class="service-item">
-                <h3>01. Fashion & Editorials</h3>
-                <span>VIEW</span>
-            </div>
-            <div class="service-item">
-                <h3>02. Portraits & Portfolios</h3>
-                <span>VIEW</span>
-            </div>
-            <div class="service-item">
-                <h3>03. Wedding & Pre-Wedding</h3>
-                <span>VIEW</span>
-            </div>
-            <div class="service-item">
-                <h3>04. Videography & Advertising</h3>
-                <span>VIEW</span>
-            </div>
+    <!-- Milestone & Stats Section -->
+    <section class="stats-section">
+        <div class="stat-box">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Brands Empowered</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">150+</div>
+            <div class="stat-label">Projects Delivered</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">Pan</div>
+            <div class="stat-label">India Reach</div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2 class="section-title">Contact.</h2>
-        <p>Step into our esteemed photography atelier, where creativity knows no bounds. We are ready to transform your vision into a masterpiece.</p>
-        
-        <div class="email">hello@tvastrastudio.com</div>
-        
-        <p><strong>Phone:</strong> +91 98765 43210</p>
-        <p><strong>Address:</strong> Noida, Uttar Pradesh, India</p>
-    </section>
+    <!-- GSAP Animation Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        // Custom Cursor Logic
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Tvastra Studio. All rights reserved.</p>
-    </footer>
+        // Add hover effect to links for custom cursor
+        document.querySelectorAll('a, .explore-btn, spline-viewer').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(2)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+        });
 
+        // GSAP Intro Animations
+        gsap.to('.anim-title', { 
+            clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)', 
+            duration: 1.5, 
+            stagger: 0.2, 
+            ease: 'power4.out', 
+            delay: 0.5 
+        });
+        
+        gsap.from('.anim-text', { 
+            opacity: 0, 
+            y: 30, 
+            duration: 1, 
+            delay: 1.2, 
+            ease: 'power3.out' 
+        });
+
+        gsap.from('.anim-btn', { 
+            opacity: 0, 
+            y: 20, 
+            duration: 1, 
+            delay: 1.5, 
+            ease: 'power3.out' 
+        });
+
+        gsap.from('.stat-box', {
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            duration: 1,
+            scrollTrigger: {
+                trigger: '.stats-section',
+                start: 'top 80%'
+            }
+        });
+    </script>
 </body>
 </html>
