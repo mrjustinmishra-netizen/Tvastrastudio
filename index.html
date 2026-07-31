@@ -3,108 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tvastra Studio | High-End Production House</title>
-    <!-- Premium Fonts: Syne for headings, Inter for body -->
+    <title>Tvastra Studio | Commercial Films That Build Brands</title>
+    <!-- Premium Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Syne:wght@600;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables & Reset */
         :root {
-            --bg-dark: #050505;
-            --text-light: #f4f4f4;
-            --accent: #ff4a00; /* Creative Orange/Red Accent */
+            --bg: #050505;
+            --text: #f4f4f4;
+            --accent: #ff4a00;
+            --gray: #888888;
+            --border: rgba(255, 255, 255, 0.1);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Custom Cursor */ }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
 
         /* Custom Cursor */
         .cursor { width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; }
         .cursor-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
 
-        /* Navbar (Multi-page Setup) */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 60px; position: absolute; width: 100%; top: 0; z-index: 100; mix-blend-mode: difference; }
-        nav .logo { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: 2px; }
-        nav ul { display: flex; gap: 40px; list-style: none; }
-        nav ul li a { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; position: relative; }
-        nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--accent); transition: width 0.3s; }
-        nav ul li a:hover::after { width: 100%; }
+        /* Navbar */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 5vw; position: fixed; width: 100%; top: 0; z-index: 100; background: rgba(5,5,5,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+        .logo { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+        .btn-outline { border: 1px solid var(--text); padding: 10px 20px; border-radius: 50px; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
+        .btn-outline:hover { background: var(--text); color: var(--bg); }
+        .btn-solid { background: var(--text); color: var(--bg); padding: 15px 30px; border-radius: 50px; font-weight: 500; display: inline-block; margin-right: 15px; transition: 0.3s; }
+        .btn-solid:hover { background: var(--accent); color: #fff; }
 
-        /* Hero Section with 3D Model */
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; position: relative; }
-        .hero-content { width: 50%; z-index: 10; }
-        .hero-content h1 { font-family: 'Syne', sans-serif; font-size: 5vw; line-height: 1; margin-bottom: 20px; text-transform: uppercase; clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%); /* For GSAP Animation */ }
-        .hero-content p { font-size: 1.2rem; font-weight: 300; opacity: 0.7; max-width: 500px; margin-bottom: 40px; }
-        
-        /* 3D Model Container */
-        .model-container { width: 50%; height: 100vh; position: absolute; right: 0; top: 0; z-index: 1; pointer-events: auto; }
+        /* Global Section Styles */
+        section { padding: 120px 5vw; border-bottom: 1px solid var(--border); position: relative; }
+        .sec-num { font-family: 'Syne', sans-serif; font-size: 12vw; position: absolute; top: 0; right: 5vw; opacity: 0.03; line-height: 1; pointer-events: none; }
+        .sec-header { display: flex; gap: 20px; align-items: baseline; margin-bottom: 60px; }
+        .sec-header .num { color: var(--accent); font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; }
+        .sec-header h2 { font-family: 'Syne', sans-serif; font-size: 3rem; text-transform: uppercase; font-weight: 600; }
 
-        /* Stats Section */
-        .stats-section { padding: 100px 60px; display: flex; justify-content: space-around; background: #0a0a0a; border-top: 1px solid #222; border-bottom: 1px solid #222; }
-        .stat-box { text-align: center; }
-        .stat-number { font-family: 'Syne', sans-serif; font-size: 4.5rem; font-weight: 800; color: var(--accent); }
-        .stat-label { font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-top: 10px; }
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 150px; }
+        .tags { color: var(--gray); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+        .hero h1 { font-family: 'Syne', sans-serif; font-size: 6vw; line-height: 1.1; margin-bottom: 30px; text-transform: uppercase; max-width: 90%; }
+        .hero p { font-size: 1.3rem; max-width: 600px; color: var(--gray); margin-bottom: 40px; }
 
-        /* Explore Button */
-        .explore-btn { padding: 18px 40px; background: transparent; border: 1px solid var(--text-light); color: var(--text-light); font-family: 'Inter', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; position: relative; overflow: hidden; z-index: 1; }
-        .explore-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--accent); z-index: -1; transition: 0.4s; }
-        .explore-btn:hover::before { left: 0; }
-        .explore-btn:hover { border-color: var(--accent); }
+        /* 01 Clients */
+        .client-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; }
+        .client-col h3 { font-size: 1.2rem; color: var(--accent); margin-bottom: 20px; }
+        .client-col ul li { font-size: 1.1rem; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
+        .client-col ul li span { font-size: 0.8rem; color: var(--gray); margin-right: 10px; }
+
+        /* 02 Showreel */
+        .showreel-container { width: 100%; height: 70vh; background: url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover; position: relative; display: flex; align-items: center; justify-content: center; border-radius: 10px; overflow: hidden; }
+        .play-btn { width: 100px; height: 100px; background: rgba(0,0,0,0.5); border: 2px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); transition: 0.3s; }
+        .play-btn:hover { background: var(--accent); transform: scale(1.1); border-color: var(--accent); }
+
+        /* 03 What we do */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .srv-card { background: #111; padding: 40px; border-radius: 10px; border: 1px solid var(--border); transition: 0.3s; }
+        .srv-card:hover { border-color: var(--accent); transform: translateY(-10px); }
+        .srv-card h3 { font-family: 'Syne', sans-serif; font-size: 1.5rem; margin-bottom: 15px; }
+        .srv-card ul li { color: var(--gray); margin-bottom: 8px; }
+
+        /* 05 Featured Projects */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
+        .project { position: relative; }
+        .project img { width: 100%; height: 400px; object-fit: cover; border-radius: 5px; margin-bottom: 20px; transition: 0.4s; }
+        .project:hover img { filter: brightness(0.7); }
+        .project-meta { font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .project h3 { font-family: 'Syne', sans-serif; font-size: 1.8rem; margin-bottom: 10px; }
+        .project p { color: var(--gray); font-size: 14px; margin-bottom: 15px; }
+        .watch-link { font-size: 12px; text-transform: uppercase; font-weight: bold; border-bottom: 1px solid var(--text); padding-bottom: 2px; }
+
+        /* Footer */
+        footer { padding: 100px 5vw 40px; background: #000; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; margin-bottom: 80px; }
+        .footer-logo { font-family: 'Syne', sans-serif; font-size: 2rem; margin-bottom: 20px; }
+        .footer-desc { max-width: 400px; color: var(--gray); }
+        .footer-col h4 { margin-bottom: 20px; color: var(--text); }
+        .footer-col a, .footer-col p { color: var(--gray); display: block; margin-bottom: 10px; font-size: 14px; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; color: var(--gray); font-size: 12px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .sec-header { flex-direction: column; gap: 5px; }
+            .sec-header h2 { font-size: 2rem; }
+        }
     </style>
-    <!-- Spline 3D Viewer Script -->
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js"></script>
 </head>
 <body>
-
-    <!-- Custom Cursor Elements -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
 
-    <!-- Navigation -->
     <nav>
-        <div class="logo">TVASTRA.</div>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="work.html">Work</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <div class="logo">Tvastra.Studio</div>
+        <div class="nav-links">
+            <a href="#">Home</a><a href="#">Work</a><a href="#">Services</a><a href="#">Industries</a>
+            <a href="#">Journal</a><a href="#">About</a>
+        </div>
+        <a href="#" class="btn-outline">Book Discovery Call</a>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="anim-title">We Craft</h1>
-            <h1 class="anim-title" style="color: var(--accent);">Visual Masterpieces</h1>
-            <p class="anim-text">India's leading production house. Blending cinematic storytelling with cutting-edge visual effects to elevate your brand.</p>
-            <a href="work.html" class="explore-btn anim-btn">Explore Our Work</a>
-        </div>
-        
-        <!-- 3D Model Embed (Interactive Camera/Abstract Shape) -->
-        <div class="model-container">
-            <spline-viewer url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"></spline-viewer>
+    <!-- Hero -->
+    <section class="hero fade-up-section">
+        <div class="tags">Commercials · Fashion · Product Films · Lifestyle</div>
+        <h1>Commercial Films That Build Brands.</h1>
+        <p>Tvastra Studio partners with ambitious brands to create commercial films, advertising campaigns, branded content, and product launches that drive attention.</p>
+        <div>
+            <a href="#" class="btn-solid">Book Discovery Call</a>
+            <a href="#showreel" style="font-size:14px; text-transform:uppercase; letter-spacing:1px; border-bottom:1px solid #fff; padding-bottom:5px;">Watch Showreel</a>
         </div>
     </section>
 
-    <!-- Milestone & Stats Section -->
-    <section class="stats-section">
-        <div class="stat-box">
-            <div class="stat-number">50+</div>
-            <div class="stat-label">Brands Empowered</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number">150+</div>
-            <div class="stat-label">Projects Delivered</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number">Pan</div>
-            <div class="stat-label">India Reach</div>
+    <!-- 01 Trusted By -->
+    <section class="fade-up-section">
+        <div class="sec-num">01</div>
+        <div class="sec-header"><span class="num">01</span><h2>Trusted by</h2></div>
+        <div class="client-grid">
+            <div class="client-col">
+                <h3>Media & Creators</h3>
+                <ul>
+                    <li><span>01</span> Zomato</li><li><span>02</span> ScoopWhoop</li><li><span>03</span> TED Talks</li>
+                    <li><span>04</span> Amazon</li><li><span>05</span> Podcast With Aashi</li><li><span>06</span> Understand UPSC</li>
+                    <li><span>07</span> Acharya Prashant</li><li><span>08</span> Ascent Bhojpuri Music</li>
+                </ul>
+            </div>
+            <div class="client-col">
+                <h3>Business & Tech</h3>
+                <ul>
+                    <li><span>01</span> Quantel.in</li><li><span>02</span> Zoom Communication</li><li><span>03</span> Ascent BPO Services</li>
+                    <li><span>04</span> Bullhorn</li><li><span>05</span> Guideman Tape</li><li><span>06</span> Taxlegit</li>
+                    <li><span>07</span> Insightbro</li><li><span>08</span> Naman Upwise</li>
+                </ul>
+            </div>
+            <div class="client-col">
+                <h3>Real Estate & Education</h3>
+                <ul>
+                    <li><span>01</span> Bhutani Infra</li><li><span>02</span> HC Interior</li><li><span>03</span> UC Interiors</li>
+                    <li><span>04</span> Camera Interior</li><li><span>05</span> Optus Interior</li><li><span>06</span> NPS, Ghaziabad</li>
+                    <li><span>07</span> EG Classes</li><li><span>08</span> Career Quest</li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <!-- GSAP Animation Scripts -->
+    <!-- 02 Showreel -->
+    <section id="showreel" class="fade-up-section">
+        <div class="sec-num">02</div>
+        <div class="sec-header"><span class="num">02</span><h2>Showreel — 90 seconds</h2></div>
+        <div class="showreel-container">
+            <div class="play-btn">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03 What We Do -->
+    <section class="fade-up-section">
+        <div class="sec-num">03</div>
+        <div class="sec-header"><span class="num">03</span><h2>What we do</h2></div>
+        <p style="margin-top:-40px; margin-bottom:50px; color:var(--gray); font-size:1.2rem;">Creative production, built around the campaign.</p>
+        <div class="services-grid">
+            <div class="srv-card">
+                <span style="color:var(--accent); font-weight:bold;">01</span>
+                <h3>Commercial Production</h3>
+                <ul><li>TV Commercials</li><li>Digital Ads</li><li>Brand Films</li></ul>
+            </div>
+            <div class="srv-card">
+                <span style="color:var(--accent); font-weight:bold;">02</span>
+                <h3>Product Campaigns</h3>
+                <ul><li>Launch Films</li><li>Product Photography</li><li>Campaign Shoots</li></ul>
+            </div>
+            <div class="srv-card">
+                <span style="color:var(--accent); font-weight:bold;">03</span>
+                <h3>Fashion</h3>
+                <ul><li>Lookbooks</li><li>Campaign Films</li><li>Editorial Shoots</li></ul>
+            </div>
+            <div class="srv-card">
+                <span style="color:var(--accent); font-weight:bold;">04</span>
+                <h3>Corporate</h3>
+                <ul><li>Employer Branding</li><li>Corporate Stories</li><li>Founder Films</li></ul>
+            </div>
+            <div class="srv-card">
+                <span style="color:var(--accent); font-weight:bold;">05</span>
+                <h3>Content Systems</h3>
+                <ul><li>Monthly Campaign Production</li><li>Retainers</li><li>Always-on Content</li></ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05 Featured Projects -->
+    <section class="fade-up-section">
+        <div class="sec-num">05</div>
+        <div class="sec-header"><span class="num">05</span><h2>Featured projects</h2></div>
+        <div class="projects-grid">
+            <div class="project">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Zomato">
+                <div class="project-meta">Food & Delivery</div>
+                <h3>Launch Film — Zomato</h3>
+                <p>Direction · Production · Post</p>
+                <a href="#" class="watch-link">Watch Film →</a>
+            </div>
+            <div class="project">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Bhutani">
+                <div class="project-meta">Real Estate</div>
+                <h3>Campaign — Bhutani Infra</h3>
+                <p>Strategy · Film · Photography</p>
+                <a href="#" class="watch-link">Watch Film →</a>
+            </div>
+            <div class="project">
+                <img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ScoopWhoop">
+                <div class="project-meta">Media</div>
+                <h3>Series — ScoopWhoop</h3>
+                <p>Content System · Production</p>
+                <a href="#" class="watch-link">Watch Film →</a>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:60px;">
+            <a href="#" class="btn-outline">View all work →</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">Tvastra.Studio</div>
+                <p class="footer-desc">A commercial film production company in India — brand films, advertising campaigns, product launches and content systems.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="mailto:studio@tvastra.com">studio@tvastra.com</a>
+                <a href="tel:+919315353402">+91 9315353402</a>
+                <p style="margin-top:20px;">A Square Mall, Office No. 5<br>Sector 73, Noida, UP<br>India — 201301</p>
+            </div>
+            <div class="footer-col">
+                <h4>Follow</h4>
+                <a href="#">WhatsApp</a><a href="#">Instagram</a><a href="#">LinkedIn</a>
+                <a href="#">Behance</a><a href="#">YouTube</a><a href="#">Vimeo</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Tvastra Studio — Noida, Uttar Pradesh</p>
+            <p>Est. 2023 — Pan India Production</p>
+        </div>
+    </footer>
+
+    <!-- GSAP Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
-        // Custom Cursor Logic
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Custom Cursor
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
         document.addEventListener('mousemove', (e) => {
@@ -114,46 +268,17 @@
             cursorDot.style.top = e.clientY + 'px';
         });
 
-        // Add hover effect to links for custom cursor
-        document.querySelectorAll('a, .explore-btn, spline-viewer').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(2)');
+        document.querySelectorAll('a, .play-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(2.5)');
             el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
         });
 
-        // GSAP Intro Animations
-        gsap.to('.anim-title', { 
-            clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)', 
-            duration: 1.5, 
-            stagger: 0.2, 
-            ease: 'power4.out', 
-            delay: 0.5 
-        });
-        
-        gsap.from('.anim-text', { 
-            opacity: 0, 
-            y: 30, 
-            duration: 1, 
-            delay: 1.2, 
-            ease: 'power3.out' 
-        });
-
-        gsap.from('.anim-btn', { 
-            opacity: 0, 
-            y: 20, 
-            duration: 1, 
-            delay: 1.5, 
-            ease: 'power3.out' 
-        });
-
-        gsap.from('.stat-box', {
-            opacity: 0,
-            y: 50,
-            stagger: 0.2,
-            duration: 1,
-            scrollTrigger: {
-                trigger: '.stats-section',
-                start: 'top 80%'
-            }
+        // Scroll Reveal
+        gsap.utils.toArray('.fade-up-section').forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: { trigger: section, start: 'top 85%' },
+                y: 50, opacity: 0, duration: 1, ease: 'power3.out'
+            });
         });
     </script>
 </body>
